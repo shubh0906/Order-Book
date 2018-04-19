@@ -1,0 +1,34 @@
+
+  <div fxFlex fxFlexOffset="20px">
+    <h3>Filter</h3>
+    <form novalidate [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-select placeholder="Choose Filter"  formControlName="filter" required>
+          <mat-option *ngFor="let filter of filters" [value]="filter.value">
+            {{filter.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="filterForm.get('filter').value=='/exchange'">
+        <mat-select  placeholder="Choose Exchange"  formControlName="exchange" required>
+          <mat-option *ngFor="let exchange of exchanges" [value]="exchange.value">
+            {{exchange.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="filterForm.get('filter').value=='/price_greater_than'">
+        <input matInput formControlName="price" placeholder="Price" type="number" required>
+      </mat-form-field>
+      <p>
+        <button type="submit" mat-raised-button class="background-primary text-floral-white">Submit</button>
+      </p>
+    </form>
+    <button (click)="onReset()" mat-raised-button class="background-primary text-floral-white">Reset</button>
+    <div *ngIf="isLoading">
+      <mat-spinner
+          mode="indeterminate">
+      </mat-spinner>
+    </div>
+    <div fxFlex *ngIf='fbids && !isLoading'>
+      <app-displaytable [tasks]='fasks' [tbids]='fbids'></app-displaytable>
+    </div>

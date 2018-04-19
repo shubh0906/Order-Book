@@ -1,0 +1,22 @@
+<div>
+  <table style="float: left;">
+  <tr>
+    <th>Ask</th>
+  </tr>
+  <tr *ngFor="let ask of tasks">
+    <td >
+      ${{ask.Price}}({{ask.Count}})<{{ask.Exchange}}>
+    </td>
+  </tr>
+</table>
+<table style="float: left;">
+<tr>
+  <th>Bid</th>
+</tr>
+<tr *ngFor="let bid of tbids">
+  <td >
+    ${{bid.Price}}({{bid.Count}})<{{bid.Exchange}}>
+  </td>
+</tr>
+</table>
+</div>
